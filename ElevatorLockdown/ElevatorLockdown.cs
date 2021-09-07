@@ -4,8 +4,10 @@ using Exiled.API.Features;
 using System;
 using System.Collections.Generic;
 
-namespace ElevatorLockdown {
-    public class ElevatorLockdown : Plugin<Config> {
+namespace ElevatorLockdown 
+{
+    public class ElevatorLockdown : Plugin<Config> 
+    {
         internal static ElevatorLockdown Instance;
 
         public override string Author => "Marco15453";
@@ -19,19 +21,22 @@ namespace ElevatorLockdown {
         public HashSet<ElevatorType> disabledElevators = new HashSet<ElevatorType>();
         public HashSet<string> Elevators = new HashSet<string> { "GateA", "GateB" };
 
-        public override void OnEnabled() {
+        public override void OnEnabled() 
+        {
             Instance = this;
             RegisterEvents();
             base.OnEnabled();
         }
 
-        public override void OnDisabled() {
+        public override void OnDisabled() 
+        {
             UnregisterEvents();
             base.OnDisabled();
         }
 
 
-        private void RegisterEvents() {
+        private void RegisterEvents() 
+        {
             serverHandler = new ServerHandler();
             playerHandler = new PlayerHandler();
 
@@ -42,7 +47,8 @@ namespace ElevatorLockdown {
             Exiled.Events.Handlers.Player.InteractingElevator += playerHandler.onInteractingElevator;
         }
 
-        private void UnregisterEvents() {
+        private void UnregisterEvents() 
+        {
             // Server
             Exiled.Events.Handlers.Server.RoundStarted -= serverHandler.onRoundStarted;
 

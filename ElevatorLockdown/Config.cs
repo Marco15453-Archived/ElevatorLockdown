@@ -1,8 +1,10 @@
 ﻿using Exiled.API.Interfaces;
 using System.ComponentModel;
 
-namespace ElevatorLockdown {
-    public sealed class Config : IConfig {
+namespace ElevatorLockdown 
+{
+    public sealed class Config : IConfig 
+    {
         [Description("Should the plugin be enabled?")]
         public bool IsEnabled { get; set; } = true;
 
@@ -10,9 +12,13 @@ namespace ElevatorLockdown {
         public int DelayMin { get; set; } = 300;
         public int DelayMax { get; set; } = 500;
 
-        [Description("What is the Chance of a Gate Elevator Failure? 100 means everytime, 1 means very rarly")]
+        [Description("What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled")]
         public int GateAFailureChance { get; set; } = 50;
         public int GateBFailureChance { get; set; } = 50;
+        public int LCZAFailureChance { get; set; } = 50;
+        public int LCZBFailureChance { get; set; } = 50;
+        public int NukeFailureChance { get; set; } = 50;
+        public int Scp049FailureChance { get; set; } = 50;
 
         [Description("How long the elevator is deactivated")]
         public int LockdownTimeMax { get; set; } = 30;
@@ -27,7 +33,7 @@ namespace ElevatorLockdown {
         [Description("How long should the broadcast be displayed? (-1 disables it)")]
         public ushort HintTime { get; set; } = 3;
 
-        [Description("What message should be displayed when player trys to call/use a deactivated Elevator? {ELEVATOR} will be replaced with the Elevator Name")]
+        [Description("What message should be displayed when player trys to call/use a deactivated Elevator?")]
         public string HintMessage { get; set; } = "<color=red>The Elevator has a malfunction!</color>";
 
         [Description("How long should the global broadcast be displayed? (-1 disables it)")]

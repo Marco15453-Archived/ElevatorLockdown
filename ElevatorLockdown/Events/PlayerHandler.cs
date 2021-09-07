@@ -3,8 +3,10 @@ using Exiled.API.Enums;
 using Exiled.Events.EventArgs;
 using System.Collections.Generic;
 
-namespace ElevatorLockdown.Events {
-    internal sealed class PlayerHandler {
+namespace ElevatorLockdown.Events 
+{
+    internal sealed class PlayerHandler 
+    {
         public void onInteractingElevator(InteractingElevatorEventArgs ev) {
             if (!ElevatorLockdown.Instance.disabledElevators.Contains(ev.Lift.Type())) return;
 
