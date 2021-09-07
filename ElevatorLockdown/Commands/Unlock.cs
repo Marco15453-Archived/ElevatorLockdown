@@ -15,47 +15,88 @@ namespace ElevatorLockdown.Commands
     {
         public string Command { get; } = "eunlock";
         public string[] Aliases { get; } = { };
-        public string Description { get; } = "Reactivates GateA or GateB Elevator";
+        public string Description { get; } = "Unlocks an Elevator";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response) {
             Player p = Player.Get((CommandSender)sender);
 
-            if (p != null && !p.CheckPermission("el.unlock")) 
+            if (p != null && !p.CheckPermission("el.unlock"))
             {
                 response = "You need the 'el.unlock' permission to use this Command!";
                 return false;
             }
 
-            if (arguments.IsEmpty()) 
+            if (arguments.IsEmpty())
             {
-                response = "You must provide the argument 'GateA' or 'GateB'";
+                response = "Use elist to get all available elevators";
                 return false;
             }
 
-            if (!ElevatorLockdown.Instance.Elevators.Contains(arguments.At(0).ToLower())) 
+            if (!ElevatorLockdown.Instance.Elevators.Contains(arguments.At(0).ToLower()))
             {
                 response = "This isn't a valid Elevator";
                 return false;
             }
 
-            if (arguments.At(0).ToLower() == "gatea" && ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) 
+            foreach (var argument in arguments)
             {
-                Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessageReactivated.Replace("{GATE}", "Gate A"));
-                ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateA);
-                response = "Gate A Lift has been reactivated by Administrator!";
-                return true;
-            } 
-            else if(arguments.At(0).ToLower() == "gateb" && ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) 
+                if (ElevatorLockdown.Instance.Elevators.Contains(argument.ToLower()) && ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorToType(argument.ToLower())))
+                {
+                    Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessage.Replace("{ELEVATOR}", CassieReadable(ElevatorToType(argument.ToLower()))));
+                    ElevatorLockdown.Instance.disabledElevators.Add(ElevatorToType(argument.ToLower()));
+                    response = $"{argument.ToLower()} Elevator has been enabled by Administrator!";
+                    return true;
+                }
+                else
+                {
+                    response = $"{argument.ToLower()} Elevator was already enabled by Automatic Failure System";
+                    return false;
+                }
+            }
+
+            response = "";
+            return false;
+        }
+
+        private ElevatorType ElevatorToType(string str)
+        {
+            switch (str)
             {
-                Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessageReactivated.Replace("{GATE}", "Gate B"));
-                ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateB);
-                response = "Gate B Lift has been reactivated by Administrator!";
-                return true;
-            } 
-            else 
+                case "gatea":
+                    return ElevatorType.GateA;
+                case "gateb":
+                    return ElevatorType.GateB;
+                case "lcza":
+                    return ElevatorType.LczA;
+                case "lczb":
+                    return ElevatorType.LczB;
+                case "nuke":
+                    return ElevatorType.Nuke;
+                case "scp049":
+                    return ElevatorType.Scp049;
+                default:
+                    return ElevatorType.Unknown;
+            }
+        }
+
+        private string CassieReadable(ElevatorType type)
+        {
+            switch (type)
             {
-                response = $"{arguments.At(0)} is already deactivated by Automatic Failure System";
-                return false;
+                case ElevatorType.GateA:
+                    return "Gate A";
+                case ElevatorType.GateB:
+                    return "Gate B";
+                case ElevatorType.LczA:
+                    return "Light Containment Zone A";
+                case ElevatorType.LczB:
+                    return "Light Containment Zone B";
+                case ElevatorType.Nuke:
+                    return "Nuke";
+                case ElevatorType.Scp049:
+                    return "SCP 0 4 9";
+                default:
+                    return "";
             }
         }
     }

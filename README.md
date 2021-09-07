@@ -6,11 +6,29 @@ Name | Permission | Description | CommandType
 ---- | ---------- | ----------- | -----------
 elock | el.lock | Locks an Elevator | RemoteAdmin
 eunlock | el.unlock | Unlocks an Elevator | RemoteAdmin
+elist | el.list | List of all available Elevators | RemoteAdmin
 
 # Config
 Name | Type | Description | Default
 ---- | ---- | ----------- | -------
-
+is_enabled | bool | Should the plugin be enabled? | true
+delay_min | int | How much time that needs to pass before the elevator lockdown min(Seconds) | 300
+delay_max | int |How much time that needs to pass before the elevator lockdown max(Seconds) | 500
+gate_a_failure_chance | int | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | 50
+gate_b_failure_chance | int | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | 50
+l_c_z_a_failure_chance | int | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | 50
+l_c_z_b_failure_chance | int | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | 50
+nuke_failure_chance | int | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | 50
+scp049_failure_chance | int | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | 50
+lockdown_time_min | int | How long the elevator is deactivated? min | 30
+lockdown_time_max | int | How long the elevator is deactivated? max | 60
+cassie_message | string | Cassie message if an elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names | {ELEVATOR} elevator critical power failure
+cassie_message_reactivated | string | Cassie message if an elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names | {ELEVATOR} elevator is back in operational mode
+hint_time | int | How long should the broadcast be displayed? (-1 disables it) | 3
+hint_message | string | What message should be displayed when player trys to call/use a deactivated Elevator? | <color=red>The Elevator has a malfunction!</color>
+global_broadcast_time | int | How long should the global broadcast be displayed? (-1 disables it) | 5
+global_broadcast_message | string | What message should be global broadcasted when a elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names | <color=red>{ELEVATOR}</color> <color=blue>Elevator Critical Power Failure! Rebooting!</color>
+global_broadcast_message_reactivated | string | What message should be global broadcasted when a elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names | <color=red>{GELEVATORATE}</color> <color=green>Elevator back in operational mode</color>
 
 # Default Config
 ```yml

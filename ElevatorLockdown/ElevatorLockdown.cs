@@ -19,7 +19,7 @@ namespace ElevatorLockdown
         private PlayerHandler playerHandler;
 
         public HashSet<ElevatorType> disabledElevators = new HashSet<ElevatorType>();
-        public HashSet<string> Elevators = new HashSet<string> { "GateA", "GateB" };
+        public HashSet<string> Elevators = new HashSet<string> { "gatea", "gateb", "lcza", "lczb", "nuke", "scp049" };
 
         public override void OnEnabled() 
         {
