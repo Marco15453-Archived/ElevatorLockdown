@@ -23,7 +23,7 @@ namespace ElevatorLockdown.Commands {
                 return false;
             }
 
-            if (arguments.Count < 1) {
+            if (arguments.IsEmpty()) {
                 response = "You must provide the argument 'GateA' or 'GateB'";
                 return false;
             }

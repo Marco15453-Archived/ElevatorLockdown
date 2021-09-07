@@ -37,7 +37,7 @@ namespace ElevatorLockdown.Commands {
                 ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateA);
                 response = "Gate A Lift has been reactivated by Administrator!";
                 return true;
-            } else if(arguments.At(0) == "gateb") {
+            } else if(arguments.At(0)== "gateb") {
                 Lift lift = Map.Lifts.First(e => e.Type() == ElevatorType.GateB);
                 if (!ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) {
                     response = "Gate B Lift is already enabled by Automatic Failure System";
