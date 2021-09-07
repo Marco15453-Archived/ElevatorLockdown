@@ -34,11 +34,6 @@ namespace ElevatorLockdown {
                 broadcastMsg = broadcastMsg.Replace("{ELEVATOR}", gateNames);
                 cassieMsg = cassieMsg.Replace("{ELEVATOR}", gateNames).Replace(",", string.Empty);
 
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA))
-                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateA);
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB))
-                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateB);
-
                 if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsg != null)
                     Map.Broadcast(3, broadcastMsg, Broadcast.BroadcastFlags.Normal, true);
                 Cassie.Message(cassieMsg);
