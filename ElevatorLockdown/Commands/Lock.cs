@@ -15,7 +15,7 @@ namespace ElevatorLockdown.Commands
     {
         public string Command { get; } = "elock";
         public string[] Aliases { get; } = { };
-        public string Description { get; } = "Locks an Elevator";
+        public string Description { get; } = "Locks Elevators";
         
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response) {
             Player p = Player.Get((CommandSender)sender);
