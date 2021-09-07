@@ -5,6 +5,7 @@ using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
 using RemoteAdmin;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ElevatorLockdown.Commands {
@@ -16,6 +17,8 @@ namespace ElevatorLockdown.Commands {
         
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response) {
             Player p = Player.Get((CommandSender)sender);
+
+            HashSet<Lift> disabledElevators = ElevatorLockdown.Instance.disabledElevators;
 
             if (!p.CheckPermission("el.unlock") && sender is PlayerCommandSender) {
                 response = "You need the 'el.unlock' permission to use this Command!";
@@ -31,22 +34,22 @@ namespace ElevatorLockdown.Commands {
 
             if(argument[0].ToLower() == "gatea") {
                 Lift lift = Map.Lifts.First(e => e.Type() == ElevatorType.GateA);
-                if(lift.enabled) {
+                if(!disabledElevators.Contains(lift)) {
                     response = "Gate A Lift is already enabled by Automatic Failure System";
                     return false;
                 }
-                Cassie.Message(ElevatorLockdown.Instance.Config.cassie_message_reactivate.Replace("{GATE}", "Gate A"));
-                lift.enabled = true;
+                Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessageReactivated.Replace("{GATE}", "Gate A"));
+                disabledElevators.Remove(lift);
                 response = "Gate A Lift has been reactivated by Administrator!";
                 return true;
             } else if(argument[0].ToLower() == "gateb") {
                 Lift lift = Map.Lifts.First(e => e.Type() == ElevatorType.GateB);
-                if (lift.enabled) {
+                if (!disabledElevators.Contains(lift)) {
                     response = "Gate B Lift is already enabled by Automatic Failure System";
                     return false;
                 }
-                Cassie.Message(ElevatorLockdown.Instance.Config.cassie_message_reactivate.Replace("{GATE}", "Gate B"));
-                lift.enabled = true;
+                Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessageReactivated.Replace("{GATE}", "Gate B"));
+                disabledElevators.Remove(lift);
                 response = "Gate B Lift has been reactivated by Administrator!";
                 return true;
             } else {

@@ -1,6 +1,7 @@
 ﻿using ElevatorLockdown.Events;
 using Exiled.API.Features;
 using System;
+using System.Collections.Generic;
 
 namespace ElevatorLockdown {
     public class ElevatorLockdown : Plugin<Config> {
@@ -8,11 +9,13 @@ namespace ElevatorLockdown {
 
         public override string Author => "Marco15453";
         public override string Name => "ElevatorLockdown";
-        public override Version Version => new Version(1, 0, 0);
+        public override Version Version => new Version(1, 1, 0);
         public override Version RequiredExiledVersion => new Version(2, 14, 0);
 
         private ServerHandler serverHandler;
         private PlayerHandler playerHandler;
+
+        public HashSet<Lift> disabledElevators;
 
         public override void OnEnabled() {
             Instance = this;

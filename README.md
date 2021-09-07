@@ -30,7 +30,7 @@ global_broadcast_message | string | What message should be global broadcasted wh
 global_broadcast_message_reactivated | string | What message should be global broadcasted when a elevator gets reactivated? {GATE} will be replaced with the Gate Name (If Both gets deactivated it {GATE} will be Gate A and Gate B) | <color=red>{GATE}</color> <color=green>Elevator back in operational mode</color>
 
 # Default Config
-```
+```yml
 elevator_lockdown:
 # Should the plugin be enabled?
   is_enabled: true
