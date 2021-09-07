@@ -35,11 +35,15 @@ namespace ElevatorLockdown {
                 } else if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA) && ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) {
                     cassie_message = cassie_message.Replace("{GATE}", "Gate A and Gate B");
                     broad_message = broad_message.Replace("{GATE}", "Gate A and Gate B");
+                } else {
+                    cassie_message = null;
+                    broad_message = null;
                 }
 
-                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0) 
+                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broad_message != null) 
                     Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broad_message, Broadcast.BroadcastFlags.Normal, true);
-                Cassie.Message(cassie_message);
+                if(cassie_message != null)
+                    Cassie.Message(cassie_message);
 
                 int random_delay = UnityEngine.Random.Range(ElevatorLockdown.Instance.Config.LockdownTimeMin, ElevatorLockdown.Instance.Config.LockdownTimeMax);
                 yield return Timing.WaitForSeconds(random_delay);
@@ -58,6 +62,9 @@ namespace ElevatorLockdown {
                 } else if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB) && ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) {
                     cassie_messagede = cassie_messagede.Replace("{GATE}", "Gate A and Gate B");
                     broad_messagede = broad_messagede.Replace("{GATE}", "Gate A and Gate B");
+                } else {
+                    cassie_messagede = null;
+                    broad_messagede = null;
                 }
 
                 if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) 
@@ -65,9 +72,10 @@ namespace ElevatorLockdown {
                 if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) 
                     ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateB);
 
-                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0) 
+                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broad_messagede != null) 
                     Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broad_messagede, Broadcast.BroadcastFlags.Normal, true);
-                Cassie.Message(cassie_messagede);
+                if(cassie_messagede != null)
+                    Cassie.Message(cassie_messagede);
             }
         }
 
