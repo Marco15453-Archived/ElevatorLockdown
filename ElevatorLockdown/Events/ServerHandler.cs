@@ -18,8 +18,10 @@ namespace ElevatorLockdown {
                 int a = UnityEngine.Random.Range(1, 100);
                 int b = UnityEngine.Random.Range(1, 100);
 
-                if (a <= ElevatorLockdown.Instance.Config.GateAFailureChance && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.GateA);
-                if (b <= ElevatorLockdown.Instance.Config.GateBFailureChance && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.GateB);
+                if (a <= ElevatorLockdown.Instance.Config.GateAFailureChance && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) 
+                    ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.GateA);
+                if (b <= ElevatorLockdown.Instance.Config.GateBFailureChance && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) 
+                    ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.GateB);
 
                 string cassie_message = ElevatorLockdown.Instance.Config.GlobalBroadcastMessage;
                 string broad_message = ElevatorLockdown.Instance.Config.CassieMessage;
