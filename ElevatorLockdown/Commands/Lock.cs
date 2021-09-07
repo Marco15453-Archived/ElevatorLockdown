@@ -29,7 +29,6 @@ namespace ElevatorLockdown.Commands {
             }
 
             if(arguments.At(0) == "gatea") {
-                Lift lift = Map.Lifts.First(e => e.Type() == ElevatorType.GateA);
                 if(ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) {
                     response = "Gate A Lift is already disabled by Automatic Failure System";
                     return false;
