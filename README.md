@@ -1,5 +1,5 @@
 # ElevatorLockdown
-A complex plugin that allows the Gate Elevators to failure after a specific chance.
+A complex plugin that allows the Gate Elevators to failure after a specific delay and chance.
 
 # Config
 Name | Type | Description | Default
