@@ -32,29 +32,30 @@ namespace ElevatorLockdown.Commands
                 return false;
             }
 
-            if(!ElevatorLockdown.Instance.Elevators.Contains(arguments.At(0).ToLower())) 
-            {
-                response = "This isn't a valid Elevator";
-                return false;
-            }
+            string elevators = string.Empty;
+            string notexist = string.Empty;
 
             foreach (var argument in arguments)
             {
                 if (ElevatorLockdown.Instance.Elevators.Contains(argument.ToLower()) && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorToType(argument.ToLower())))
                 {
-                    Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessage.Replace("{ELEVATOR}", CassieReadable(ElevatorToType(argument.ToLower()))));
                     ElevatorLockdown.Instance.disabledElevators.Add(ElevatorToType(argument.ToLower()));
-                    response = $"{argument.ToLower()} Elevator has been disabled by Administrator!";
-                    return true;
+                    elevators += $"{CassieReadable(ElevatorToType(argument.ToLower())).Trim()}, ";
                 } else
                 {
-                    response = $"{argument.ToLower()} Elevator was already disabled by Automatic Failure System";
-                    return false;
+                    notexist += $"{argument.ToLower()}, ";
                 }
             }
 
-            response = "";
-            return false;
+            if(notexist != null)
+            {
+                response = $"{notexist.Remove(notexist.LastIndexOf(","))} are not valid Elevators!";
+                return false;
+            }
+
+            Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessage.Replace("{ELEVATOR}", elevators).Replace(",", string.Empty));
+            response = $"{elevators} Elevators was disabled by Administrator";
+            return true;
         }
 
         private ElevatorType ElevatorToType(string str)
