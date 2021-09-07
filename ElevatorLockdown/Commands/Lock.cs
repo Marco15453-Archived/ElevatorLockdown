@@ -17,8 +17,8 @@ namespace ElevatorLockdown.Commands {
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response) {
             Player p = Player.Get((CommandSender)sender);
 
-            if (!p.CheckPermission("el.lockdown") && sender is PlayerCommandSender) {
-                response = "You need the 'el.lockdown' permission to use this Command!";
+            if (!p.CheckPermission("el.lock") && sender is PlayerCommandSender) {
+                response = "You need the 'el.lock' permission to use this Command!";
                 return false;
             }
 
