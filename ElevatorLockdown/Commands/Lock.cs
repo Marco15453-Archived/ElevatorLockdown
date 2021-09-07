@@ -11,16 +11,14 @@ using System.Linq;
 namespace ElevatorLockdown.Commands {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     public class Lock : ICommand {
-        public string Command { get; } = "el_lock";
+        public string Command { get; } = "elock";
         public string[] Aliases { get; } = null;
         public string Description { get; } = "Locks GateA or GateB Elevator";
         
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response) {
             Player p = Player.Get((CommandSender)sender);
 
-            HashSet<Lift> disabledElevators = ElevatorLockdown.Instance.disabledElevators;
-
-            if (!p.CheckPermission("el.lock") && sender is PlayerCommandSender) {
+            if (p != null && !p.CheckPermission("el.lock")) {
                 response = "You need the 'el.lock' permission to use this Command!";
                 return false;
             }
@@ -34,22 +32,21 @@ namespace ElevatorLockdown.Commands {
 
             if(argument[0].ToLower() == "gatea") {
                 Lift lift = Map.Lifts.First(e => e.Type() == ElevatorType.GateA);
-                if(disabledElevators.Contains(lift)) {
+                if(ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) {
                     response = "Gate A Lift is already disabled by Automatic Failure System";
                     return false;
                 }
                 Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessage.Replace("{GATE}", "Gate A"));
-                disabledElevators.Add(lift);
+                ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.GateA);
                 response = "Gate A Lift has been disabled by Administrator!";
                 return true;
             } else if(argument[0].ToLower() == "gateb") {
-                Lift lift = Map.Lifts.First(e => e.Type() == ElevatorType.GateB);
-                if (disabledElevators.Contains(lift)) {
+                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) {
                     response = "Gate B Lift is already disabled by Automatic Failure System";
                     return false;
                 }
                 Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessage.Replace("{GATE}", "Gate B"));
-                disabledElevators.Add(lift);
+                ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.GateB);
                 response = "Gate B Lift has been disabled by Administrator!";
                 return true;
             } else {

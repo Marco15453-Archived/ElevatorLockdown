@@ -1,4 +1,5 @@
 ﻿using ElevatorLockdown.Events;
+using Exiled.API.Enums;
 using Exiled.API.Features;
 using System;
 using System.Collections.Generic;
@@ -15,21 +16,21 @@ namespace ElevatorLockdown {
         private ServerHandler serverHandler;
         private PlayerHandler playerHandler;
 
-        public HashSet<Lift> disabledElevators = new HashSet<Lift>();
+        public HashSet<ElevatorType> disabledElevators = new HashSet<ElevatorType>();
 
         public override void OnEnabled() {
             Instance = this;
-            registerEvents();
+            RegisterEvents();
             base.OnEnabled();
         }
 
         public override void OnDisabled() {
-            unregisterEvents();
+            UnregisterEvents();
             base.OnDisabled();
         }
 
 
-        private void registerEvents() {
+        private void RegisterEvents() {
             serverHandler = new ServerHandler();
             playerHandler = new PlayerHandler();
 
@@ -40,7 +41,7 @@ namespace ElevatorLockdown {
             Exiled.Events.Handlers.Player.InteractingElevator += playerHandler.onInteractingElevator;
         }
 
-        private void unregisterEvents() {
+        private void UnregisterEvents() {
             // Server
             Exiled.Events.Handlers.Server.RoundStarted -= serverHandler.onRoundStarted;
 

@@ -5,11 +5,8 @@ using System.Collections.Generic;
 
 namespace ElevatorLockdown.Events {
     internal sealed class PlayerHandler {
-
         public void onInteractingElevator(InteractingElevatorEventArgs ev) {
-            HashSet<Lift> disabledElevators = ElevatorLockdown.Instance.disabledElevators;
-
-            if(disabledElevators.Contains(ev.Lift)) {
+            if(ElevatorLockdown.Instance.disabledElevators.Contains(ev.Lift.Type())) {
                 if (ElevatorLockdown.Instance.Config.HintTime > 0) ev.Player.ShowHint(ElevatorLockdown.Instance.Config.HintMessage, ElevatorLockdown.Instance.Config.HintTime);
                 ev.IsAllowed = false;
             }
