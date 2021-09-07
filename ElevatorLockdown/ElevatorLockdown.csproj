@@ -74,7 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Unlock.cs" />
-    <Compile Include="Commands\Lockdown.cs" />
+    <Compile Include="Commands\Lock.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ElevatorLockdown.cs" />
     <Compile Include="Events\ServerHandler.cs" />

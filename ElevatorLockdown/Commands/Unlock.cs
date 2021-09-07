@@ -10,7 +10,7 @@ using System.Linq;
 namespace ElevatorLockdown.Commands {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     public class Unlock : ICommand {
-        public string Command { get; } = "unlock";
+        public string Command { get; } = "el_unlock";
         public string[] Aliases { get; } = null;
         public string Description { get; } = "Reactivates GateA or GateB Elevator";
         

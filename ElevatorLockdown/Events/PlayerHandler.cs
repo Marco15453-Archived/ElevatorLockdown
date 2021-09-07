@@ -9,12 +9,12 @@ namespace ElevatorLockdown.Events {
             if (ev.Lift.enabled) return;
 
             if (ev.Lift.Type() == ElevatorType.GateA) {
-                if (ElevatorLockdown.Instance.Config.broadcast) ev.Player.Broadcast(ElevatorLockdown.Instance.Config.broadcast_time, ElevatorLockdown.Instance.Config.broadcast_message.Replace("{GATE}", "Gate A"), Broadcast.BroadcastFlags.Normal, true);
-
+                if (ElevatorLockdown.Instance.Config.hint) ev.Player.ShowHint(ElevatorLockdown.Instance.Config.hint_message.Replace("{GATE}", "Gate A"), ElevatorLockdown.Instance.Config.hint_time);
+                
                 ev.IsAllowed = false;
                 return;
             } else if (ev.Lift.Type() == ElevatorType.GateB) {
-                if (ElevatorLockdown.Instance.Config.broadcast) ev.Player.Broadcast(ElevatorLockdown.Instance.Config.broadcast_time, ElevatorLockdown.Instance.Config.broadcast_message.Replace("{GATE}", "Gate B"), Broadcast.BroadcastFlags.Normal, true);
+                if (ElevatorLockdown.Instance.Config.hint) ev.Player.ShowHint(ElevatorLockdown.Instance.Config.hint_message.Replace("{GATE}", "Gate B"), ElevatorLockdown.Instance.Config.hint_time);
 
                 ev.IsAllowed = false;
                 return;

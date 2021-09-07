@@ -9,10 +9,10 @@ using System.Linq;
 
 namespace ElevatorLockdown.Commands {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
-    public class Lockdown : ICommand {
-        public string Command { get; } = "lockdown";
+    public class Lock : ICommand {
+        public string Command { get; } = "el_lock";
         public string[] Aliases { get; } = null;
-        public string Description { get; } = "Lockdown an GateA or GateB Elevator";
+        public string Description { get; } = "Locks GateA or GateB Elevator";
         
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response) {
             Player p = Player.Get((CommandSender)sender);
