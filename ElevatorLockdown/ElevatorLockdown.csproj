@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\List.cs" />
     <Compile Include="Commands\Unlock.cs" />
     <Compile Include="Commands\Lock.cs" />
     <Compile Include="Config.cs" />
