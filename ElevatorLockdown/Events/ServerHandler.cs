@@ -37,7 +37,8 @@ namespace ElevatorLockdown {
                     broad_message = broad_message.Replace("{GATE}", "Gate A and Gate B");
                 }
 
-                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0) Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broad_message, Broadcast.BroadcastFlags.Normal, true);
+                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0) 
+                    Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broad_message, Broadcast.BroadcastFlags.Normal, true);
                 Cassie.Message(cassie_message);
 
                 int random_delay = UnityEngine.Random.Range(ElevatorLockdown.Instance.Config.LockdownTimeMin, ElevatorLockdown.Instance.Config.LockdownTimeMax);
@@ -59,10 +60,13 @@ namespace ElevatorLockdown {
                     broad_messagede = broad_messagede.Replace("{GATE}", "Gate A and Gate B");
                 }
 
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateA);
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateB);
+                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) 
+                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateA);
+                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) 
+                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateB);
 
-                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0) Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broad_messagede, Broadcast.BroadcastFlags.Normal, true);
+                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0) 
+                    Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broad_messagede, Broadcast.BroadcastFlags.Normal, true);
                 Cassie.Message(cassie_messagede);
             }
         }
