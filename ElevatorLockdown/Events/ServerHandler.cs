@@ -7,6 +7,7 @@ using System;
 using UnityEngine;
 using Exiled.API.Enums;
 using Exiled.Events.EventArgs;
+using System.Text.RegularExpressions;
 
 namespace ElevatorLockdown {
     internal sealed class ServerHandler {
@@ -23,59 +24,47 @@ namespace ElevatorLockdown {
                 if (b <= ElevatorLockdown.Instance.Config.GateBFailureChance && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) 
                     ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.GateB);
 
-                string cassie_message = ElevatorLockdown.Instance.Config.GlobalBroadcastMessage;
-                string broad_message = ElevatorLockdown.Instance.Config.CassieMessage;
+                string broadcastMsg = ElevatorLockdown.Instance.Config.GlobalBroadcastMessage;
+                string cassieMsg = ElevatorLockdown.Instance.Config.CassieMessage;
+                string gateNames = string.Empty;
 
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA) && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) {
-                    cassie_message = cassie_message.Replace("{GATE}", "Gate A");
-                    broad_message = broad_message.Replace("{GATE}", "Gate A");
-                } else if (!ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA) && ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) {
-                    cassie_message = cassie_message.Replace("{GATE}", "Gate B");
-                    broad_message = broad_message.Replace("{GATE}", "Gate B");
-                } else if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA) && ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) {
-                    cassie_message = cassie_message.Replace("{GATE}", "Gate A and Gate B");
-                    broad_message = broad_message.Replace("{GATE}", "Gate A and Gate B");
-                } else {
-                    cassie_message = null;
-                    broad_message = null;
-                }
+                foreach (ElevatorType type in ElevatorLockdown.Instance.disabledElevators)
+                    gateNames += $"{Regex.Replace(type.ToString(), @"(?<!^)([A-Z][a-z]|(?<=[a-z])[A-Z])", " $1").Trim()}, ";
+                gateNames = gateNames.Remove(gateNames.LastIndexOf(','));
+                broadcastMsg = broadcastMsg.Replace("{ELEVATOR}", gateNames);
+                cassieMsg = cassieMsg.Replace("{ELEVATOR}", gateNames).Replace(",", string.Empty);
 
-                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broad_message != null) 
-                    Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broad_message, Broadcast.BroadcastFlags.Normal, true);
-                if(cassie_message != null)
-                    Cassie.Message(cassie_message);
+                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA))
+                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateA);
+                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB))
+                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateB);
+
+                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsg != null)
+                    Map.Broadcast(3, broadcastMsg, Broadcast.BroadcastFlags.Normal, true);
+                Cassie.Message(cassieMsg);
 
                 int random_delay = UnityEngine.Random.Range(ElevatorLockdown.Instance.Config.LockdownTimeMin, ElevatorLockdown.Instance.Config.LockdownTimeMax);
                 yield return Timing.WaitForSeconds(random_delay);
 
                 // Reactive the Elevators
+                string broadcastMsgde = ElevatorLockdown.Instance.Config.GlobalBroadcastMessageReactivated;
+                string cassieMsgde = ElevatorLockdown.Instance.Config.CassieMessageReactivated;
+                string gateNamesde = string.Empty;
 
-                string cassie_messagede = ElevatorLockdown.Instance.Config.GlobalBroadcastMessageReactivated;
-                string broad_messagede = ElevatorLockdown.Instance.Config.CassieMessageReactivated;
+                foreach (ElevatorType type in ElevatorLockdown.Instance.disabledElevators)
+                    gateNamesde += $"{Regex.Replace(type.ToString(), @"(?<!^)([A-Z][a-z]|(?<=[a-z])[A-Z])", " $1").Trim()}, ";
+                gateNamesde = gateNamesde.Remove(gateNamesde.LastIndexOf(','));
+                broadcastMsgde = broadcastMsgde.Replace("{ELEVATOR}", gateNamesde);
+                cassieMsgde = cassieMsgde.Replace("{ELEVATOR}", gateNamesde).Replace(",", string.Empty);
 
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA) && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) {
-                    cassie_messagede = cassie_messagede.Replace("{GATE}", "Gate A");
-                    broad_messagede = broad_messagede.Replace("{GATE}", "Gate A");
-                } else if (!ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB) && ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) {
-                    cassie_messagede = cassie_messagede.Replace("{GATE}", "Gate B");
-                    broad_messagede = broad_messagede.Replace("{GATE}", "Gate B");
-                } else if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB) && ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) {
-                    cassie_messagede = cassie_messagede.Replace("{GATE}", "Gate A and Gate B");
-                    broad_messagede = broad_messagede.Replace("{GATE}", "Gate A and Gate B");
-                } else {
-                    cassie_messagede = null;
-                    broad_messagede = null;
-                }
-
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) 
+                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA))
                     ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateA);
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) 
+                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB))
                     ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateB);
 
-                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broad_messagede != null) 
-                    Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broad_messagede, Broadcast.BroadcastFlags.Normal, true);
-                if(cassie_messagede != null)
-                    Cassie.Message(cassie_messagede);
+                if(ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsgde != null) 
+                    Map.Broadcast(3, broadcastMsgde, Broadcast.BroadcastFlags.Normal, true);
+                Cassie.Message(cassieMsgde);
             }
         }
 

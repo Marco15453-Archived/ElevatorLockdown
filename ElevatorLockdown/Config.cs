@@ -18,25 +18,25 @@ namespace ElevatorLockdown {
         public int LockdownTimeMax { get; set; } = 30;
         public int LockdownTimeMin { get; set; } = 60;
 
-        [Description("Cassie message if an elevator gets deactivated? {GATE} will be replaced with the Gate Name (If Both gets deactivated it {GATE} will be Gate A and Gate B)")]
-        public string CassieMessage { get; set; } = "{GATE} elevator critical power failure";
+        [Description("Cassie message if an elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names")]
+        public string CassieMessage { get; set; } = "{ELEVATOR} elevator critical power failure";
         
-        [Description("Cassie message if an elevator gets reactivated? {GATE} will be replaced with the Gate Name (If Both gets deactivated it {GATE} will be Gate A and Gate B)")]
-        public string CassieMessageReactivated { get; set; } = "{GATE} elevator is back in operational mode";
+        [Description("Cassie message if an elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names")]
+        public string CassieMessageReactivated { get; set; } = "{ELEVATOR} elevator is back in operational mode";
 
         [Description("How long should the broadcast be displayed? (-1 disables it)")]
         public ushort HintTime { get; set; } = 3;
 
-        [Description("What message should be displayed when player trys to call/use a deactivated Elevator? {GATE} will be replaced with the Gate Name")]
+        [Description("What message should be displayed when player trys to call/use a deactivated Elevator? {ELEVATOR} will be replaced with the Elevator Name")]
         public string HintMessage { get; set; } = "<color=red>The Elevator has a malfunction!</color>";
 
         [Description("How long should the global broadcast be displayed? (-1 disables it)")]
         public ushort GlobalBroadcastTime { get; set; } = 5;
 
-        [Description("What message should be global broadcasted when a elevator gets deactivated? {GATE} will be replaced with the Gate Name (If Both gets deactivated it {GATE} will be Gate A and Gate B)")]
-        public string GlobalBroadcastMessage { get; set; } = "<color=red>{GATE}</color> <color=blue>Elevator Critical Power Failure! Rebooting!</color>";
+        [Description("What message should be global broadcasted when a elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names")]
+        public string GlobalBroadcastMessage { get; set; } = "<color=red>{ELEVATOR}</color> <color=blue>Elevator Critical Power Failure! Rebooting!</color>";
 
-        [Description("What message should be global broadcasted when a elevator gets reactivated? {GATE} will be replaced with the Gate Name (If Both gets deactivated it {GATE} will be Gate A and Gate B)")]
-        public string GlobalBroadcastMessageReactivated { get; set; } = "<color=red>{GATE}</color> <color=green>Elevator back in operational mode</color>";
+        [Description("What message should be global broadcasted when a elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names")]
+        public string GlobalBroadcastMessageReactivated { get; set; } = "<color=red>{GELEVATORATE}</color> <color=green>Elevator back in operational mode</color>";
     }
 }
