@@ -50,9 +50,6 @@ namespace ElevatorLockdown
                 broadcastMsg = broadcastMsg.Replace("{ELEVATOR}", gateNames);
                 cassieMsg = cassieMsg.Replace("{ELEVATOR}", gateNames).Replace(",", string.Empty).Replace("-", " ");
 
-                Log.Info(cassieMsg);
-                Log.Info(broadcastMsg);
-
                 if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsg != null)
                     Map.Broadcast(3, broadcastMsg, Broadcast.BroadcastFlags.Normal, true);
                 Cassie.Message(cassieMsg);

@@ -44,5 +44,6 @@ namespace ElevatorLockdown
 
         [Description("What message should be global broadcasted when a elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names")]
         public string GlobalBroadcastMessageReactivated { get; set; } = "<color=red>{GELEVATORATE}</color> <color=green>Elevator back in operational mode</color>";
+
     }
 }
