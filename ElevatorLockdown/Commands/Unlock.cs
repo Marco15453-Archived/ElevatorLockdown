@@ -39,7 +39,7 @@ namespace ElevatorLockdown.Commands {
                 response = "Gate B Lift has been reactivated by Administrator!";
                 return true;
             } else {
-                response = $"{arguments.At(1)} is already deactivated by Automatic Failure System";
+                response = $"{arguments.At(0)} is already deactivated by Automatic Failure System";
                 return false;
             }
         }
