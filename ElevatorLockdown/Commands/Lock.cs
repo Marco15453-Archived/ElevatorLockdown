@@ -28,26 +28,18 @@ namespace ElevatorLockdown.Commands {
                 return false;
             }
 
-            if(arguments.At(0) == "gatea") {
-                if(ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) {
-                    response = "Gate A Lift is already disabled by Automatic Failure System";
-                    return false;
-                }
+            if(arguments.At(0) == "gatea" && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) {
                 Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessage.Replace("{GATE}", "Gate A"));
                 ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.GateA);
                 response = "Gate A Lift has been disabled by Administrator!";
                 return true;
-            } else if(arguments.At(0) == "gateb") {
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) {
-                    response = "Gate B Lift is already disabled by Automatic Failure System";
-                    return false;
-                }
+            } else if(arguments.At(0) == "gateb" && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) {
                 Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessage.Replace("{GATE}", "Gate B"));
                 ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.GateB);
                 response = "Gate B Lift has been disabled by Administrator!";
                 return true;
             } else {
-                response = "Argument must be 'GateA' or 'GateB'!";
+                response = $"{arguments.At(0)} Lift is already disabled by Automatic Failure System";
                 return false;
             }
         }
