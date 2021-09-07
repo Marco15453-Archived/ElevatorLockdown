@@ -28,7 +28,7 @@ hint_time | int | How long should the broadcast be displayed? (-1 disables it) |
 hint_message | string | What message should be displayed when player trys to call/use a deactivated Elevator? | <color=red>The Elevator has a malfunction!</color>
 global_broadcast_time | int | How long should the global broadcast be displayed? (-1 disables it) | 5
 global_broadcast_message | string | What message should be global broadcasted when a elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names | <color=red>{ELEVATOR}</color> <color=blue>Elevator Critical Power Failure! Rebooting!</color>
-global_broadcast_message_reactivated | string | What message should be global broadcasted when a elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names | <color=red>{GELEVATORATE}</color> <color=green>Elevator back in operational mode</color>
+global_broadcast_message_reactivated | string | What message should be global broadcasted when a elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names | <color=red>{ELEVATOR}</color> <color=green>Elevator back in operational mode</color>
 
 # Default Config
 ```yml
@@ -61,5 +61,5 @@ elevator_lockdown:
   # What message should be global broadcasted when a elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names
   global_broadcast_message: <color=red>{ELEVATOR}</color> <color=blue>Elevator Critical Power Failure! Rebooting!</color>
   # What message should be global broadcasted when a elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names
-  global_broadcast_message_reactivated: <color=red>{GELEVATORATE}</color> <color=green>Elevator back in operational mode</color>
+  global_broadcast_message_reactivated: <color=red>{ELEVATOR}</color> <color=green>Elevator back in operational mode</color>
 ```

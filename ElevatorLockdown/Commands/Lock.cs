@@ -35,7 +35,7 @@ namespace ElevatorLockdown.Commands
             string elevators = string.Empty;
             string notexist = string.Empty;
 
-            foreach (var argument in arguments)
+            foreach (var argument in arguments.ToList())
             {
                 if (ElevatorLockdown.Instance.Elevators.Contains(argument.ToLower()) && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorToType(argument.ToLower())))
                 {
