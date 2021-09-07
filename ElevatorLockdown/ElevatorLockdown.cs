@@ -17,6 +17,7 @@ namespace ElevatorLockdown {
         private PlayerHandler playerHandler;
 
         public HashSet<ElevatorType> disabledElevators = new HashSet<ElevatorType>();
+        public HashSet<string> Elevators = new HashSet<string> { "GateA", "GateB" };
 
         public override void OnEnabled() {
             Instance = this;

@@ -28,7 +28,12 @@ namespace ElevatorLockdown.Commands {
                 return false;
             }
 
-            if(arguments.At(0) == "gatea" && ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) {
+            if (!ElevatorLockdown.Instance.Elevators.Contains(arguments.At(0))) {
+                response = "This isn't a valid Elevator";
+                return false;
+            }
+
+            if (arguments.At(0) == "gatea" && ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) {
                 Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessageReactivated.Replace("{GATE}", "Gate A"));
                 ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateA);
                 response = "Gate A Lift has been reactivated by Administrator!";
