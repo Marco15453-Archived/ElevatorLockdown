@@ -12,7 +12,7 @@ namespace ElevatorLockdown.Commands {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     public class Lock : ICommand {
         public string Command { get; } = "elock";
-        public string[] Aliases { get; } = null;
+        public string[] Aliases { get; } = { };
         public string Description { get; } = "Locks GateA or GateB Elevator";
         
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response) {
