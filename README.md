@@ -2,10 +2,10 @@
 A complex plugin that allows the Gate Elevators to failure after a specific delay and chance.
 
 # Commands
-Name | Permission | Description
----- | ---------- | -----------
-el_lock | el.lock | Locks GateA or GateB Elevator
-el_unlock | el.unlock | Reactivates GateA or GateB Elevator
+Name | Permission | Description | CommandType
+---- | ---------- | ----------- | -----------
+el_lock | el.lock | Locks GateA or GateB Elevator | RemoteAdmin
+el_unlock | el.unlock | Reactivates GateA or GateB Elevator | RemoteAdmin
 
 # Config
 Name | Type | Description | Default
