@@ -28,9 +28,7 @@ namespace ElevatorLockdown.Commands {
                 return false;
             }
 
-            var argument = arguments.ToList();
-
-            if(argument[0].ToLower() == "gatea") {
+            if(arguments.At(0) == "gatea") {
                 Lift lift = Map.Lifts.First(e => e.Type() == ElevatorType.GateA);
                 if(ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) {
                     response = "Gate A Lift is already disabled by Automatic Failure System";
@@ -40,7 +38,7 @@ namespace ElevatorLockdown.Commands {
                 ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.GateA);
                 response = "Gate A Lift has been disabled by Administrator!";
                 return true;
-            } else if(argument[0].ToLower() == "gateb") {
+            } else if(arguments.At(0) == "gateb") {
                 if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) {
                     response = "Gate B Lift is already disabled by Automatic Failure System";
                     return false;
