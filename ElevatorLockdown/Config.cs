@@ -21,8 +21,8 @@ namespace ElevatorLockdown
         public int Scp049FailureChance { get; set; } = 50;
 
         [Description("How long the elevator is deactivated")]
-        public int LockdownTimeMax { get; set; } = 30;
-        public int LockdownTimeMin { get; set; } = 60;
+        public int LockdownTimeMin { get; set; } = 30;
+        public int LockdownTimeMax { get; set; } = 60;
 
         [Description("Cassie message if an elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names")]
         public string CassieMessage { get; set; } = "{ELEVATOR} elevator critical power failure";
