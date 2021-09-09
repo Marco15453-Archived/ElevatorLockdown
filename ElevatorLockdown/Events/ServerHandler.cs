@@ -82,7 +82,7 @@ namespace ElevatorLockdown
                     ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.Scp049);
 
                 if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsgde != null) 
-                    Map.Broadcast(3, broadcastMsgde, Broadcast.BroadcastFlags.Normal, true);
+                    Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broadcastMsgde, Broadcast.BroadcastFlags.Normal, true);
                 Cassie.Message(cassieMsgde);
             }
         }
