@@ -51,7 +51,7 @@ namespace ElevatorLockdown
                 cassieMsg = cassieMsg.Replace("{ELEVATOR}", gateNames).Replace(",", string.Empty).Replace("-", " ");
 
                 if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsg != null)
-                    Map.Broadcast(3, broadcastMsg, Broadcast.BroadcastFlags.Normal, true);
+                    Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broadcastMsg, Broadcast.BroadcastFlags.Normal, true);
                 Cassie.Message(cassieMsg);
 
                 int random_delay = UnityEngine.Random.Range(ElevatorLockdown.Instance.Config.LockdownTimeMin, ElevatorLockdown.Instance.Config.LockdownTimeMax);
