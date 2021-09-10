@@ -14,14 +14,10 @@ Name | Type | Description | Default
 is_enabled | bool | Should the plugin be enabled? | true
 delay_min | int | How much time that needs to pass before the elevator lockdown min(Seconds) | 300
 delay_max | int |How much time that needs to pass before the elevator lockdown max(Seconds) | 500
-gate_a_failure_chance | int | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | 50
-gate_b_failure_chance | int | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | 50
-l_c_z_a_failure_chance | int | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | 50
-l_c_z_b_failure_chance | int | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | 50
-nuke_failure_chance | int | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | 50
-scp049_failure_chance | int | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | 50
+failure_chances | Dictionary | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | All on 50
 lockdown_time_min | int | How long the elevator is deactivated? min | 30
 lockdown_time_max | int | How long the elevator is deactivated? max | 60
+cassie_readable | Dictionary | Cassie Replacements for ElevatorType | Gate A, Gate B, Light Containment Zone A, Light Containment Zone B, Nuke, SCP 0 4 9
 cassie_message | string | Cassie message if an elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names | {ELEVATOR} elevator critical power failure
 cassie_message_reactivated | string | Cassie message if an elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names | {ELEVATOR} elevator is back in operational mode
 hint_time | int | How long should the broadcast be displayed? (-1 disables it) | 3
@@ -39,15 +35,24 @@ elevator_lockdown:
   delay_min: 300
   delay_max: 500
   # What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled
-  gate_a_failure_chance: 50
-  gate_b_failure_chance: 50
-  l_c_z_a_failure_chance: 50
-  l_c_z_b_failure_chance: 50
-  nuke_failure_chance: 50
-  scp049_failure_chance: 50
+  failure_chances:
+    GateA: 50
+    GateB: 50
+    LczA: 50
+    LczB: 50
+    Nuke: 50
+    Scp049: 50
   # How long the elevator is deactivated
-  lockdown_time_max: 30
-  lockdown_time_min: 60
+  lockdown_time_min: 30
+  lockdown_time_max: 60
+  # Cassie Replacements for ElevatorType
+  cassie_readable:
+    GateA: Gate A
+    GateB: Gate B
+    LczA: Light Containment Zone A
+    LczB: Light Containment Zone B
+    Nuke: Nuke
+    Scp049: SCP 0 4 9
   # Cassie message if an elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names
   cassie_message: '{ELEVATOR} elevator critical power failure'
   # Cassie message if an elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names

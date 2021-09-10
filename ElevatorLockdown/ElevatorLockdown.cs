@@ -12,7 +12,7 @@ namespace ElevatorLockdown
 
         public override string Author => "Marco15453";
         public override string Name => "ElevatorLockdown";
-        public override Version Version => new Version(1, 1, 0);
+        public override Version Version => new Version(1, 2, 0);
         public override Version RequiredExiledVersion => new Version(2, 14, 0);
 
         private ServerHandler serverHandler;
@@ -20,6 +20,15 @@ namespace ElevatorLockdown
 
         public HashSet<ElevatorType> disabledElevators = new HashSet<ElevatorType>();
         public HashSet<string> Elevators = new HashSet<string> { "gatea", "gateb", "lcza", "lczb", "nuke", "scp049" };
+        public Dictionary<string, ElevatorType> StringToElevator = new Dictionary<string, ElevatorType>()
+        {
+            { "gatea", ElevatorType.GateA},
+            { "gateb", ElevatorType.GateB },
+            { "lcza", ElevatorType.LczA},
+            { "lczb", ElevatorType.LczB},
+            { "nuke", ElevatorType.Nuke},
+            { "scp049", ElevatorType.Scp049}
+        };
 
         public override void OnEnabled() 
         {

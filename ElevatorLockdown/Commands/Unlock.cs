@@ -61,44 +61,20 @@ namespace ElevatorLockdown.Commands
 
         private ElevatorType ElevatorToType(string str)
         {
-            switch (str)
+            foreach (var readable in ElevatorLockdown.Instance.StringToElevator)
             {
-                case "gatea":
-                    return ElevatorType.GateA;
-                case "gateb":
-                    return ElevatorType.GateB;
-                case "lcza":
-                    return ElevatorType.LczA;
-                case "lczb":
-                    return ElevatorType.LczB;
-                case "nuke":
-                    return ElevatorType.Nuke;
-                case "scp049":
-                    return ElevatorType.Scp049;
-                default:
-                    return ElevatorType.Unknown;
+                if (readable.Key == str) return readable.Value;
             }
+            return ElevatorType.Unknown;
         }
 
         private string CassieReadable(ElevatorType type)
         {
-            switch (type)
+            foreach (var readable in ElevatorLockdown.Instance.Config.CassieReadable)
             {
-                case ElevatorType.GateA:
-                    return "Gate A";
-                case ElevatorType.GateB:
-                    return "Gate B";
-                case ElevatorType.LczA:
-                    return "Light Containment Zone A";
-                case ElevatorType.LczB:
-                    return "Light Containment Zone B";
-                case ElevatorType.Nuke:
-                    return "Nuke";
-                case ElevatorType.Scp049:
-                    return "SCP 0 4 9";
-                default:
-                    return "";
+                if (readable.Key == type) return readable.Value;
             }
+            return "";
         }
     }
 }

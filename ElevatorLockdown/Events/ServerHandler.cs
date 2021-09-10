@@ -20,25 +20,12 @@ namespace ElevatorLockdown
                 int startdelay = UnityEngine.Random.Range(ElevatorLockdown.Instance.Config.DelayMin, ElevatorLockdown.Instance.Config.DelayMax);
                 yield return Timing.WaitForSeconds(startdelay);
 
-                int a = UnityEngine.Random.Range(1, 100);
-                int b = UnityEngine.Random.Range(1, 100);
-                int LCZA = UnityEngine.Random.Range(1, 100);
-                int LCZB = UnityEngine.Random.Range(1, 100);
-                int Nuke = UnityEngine.Random.Range(1, 100);
-                int Scp049 = UnityEngine.Random.Range(1, 100);
-
-                if (a <= ElevatorLockdown.Instance.Config.GateAFailureChance && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA)) 
-                    ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.GateA);
-                if (b <= ElevatorLockdown.Instance.Config.GateBFailureChance && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB)) 
-                    ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.GateB);
-                if (LCZA <= ElevatorLockdown.Instance.Config.LCZAFailureChance && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.LczA))
-                    ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.LczA);
-                if (LCZB <= ElevatorLockdown.Instance.Config.LCZBFailureChance && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.LczB))
-                    ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.LczB);
-                if (Nuke <= ElevatorLockdown.Instance.Config.NukeFailureChance && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.Nuke))
-                    ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.Nuke);
-                if (Scp049 <= ElevatorLockdown.Instance.Config.Scp049FailureChance && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.Scp049))
-                    ElevatorLockdown.Instance.disabledElevators.Add(ElevatorType.Scp049);
+                foreach(var failures in ElevatorLockdown.Instance.Config.FailureChances)
+                {
+                    int random = UnityEngine.Random.Range(1, 100);
+                    if (random <= failures.Value && !ElevatorLockdown.Instance.disabledElevators.Contains(failures.Key)) 
+                        ElevatorLockdown.Instance.disabledElevators.Add(failures.Key);
+                }
 
                 string broadcastMsg = ElevatorLockdown.Instance.Config.GlobalBroadcastMessage;
                 string cassieMsg = ElevatorLockdown.Instance.Config.CassieMessage;
@@ -68,18 +55,8 @@ namespace ElevatorLockdown
                 broadcastMsgde = broadcastMsgde.Replace("{ELEVATOR}", gateNamesde);
                 cassieMsgde = cassieMsgde.Replace("{ELEVATOR}", gateNamesde).Replace(",", string.Empty);
 
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateA))
-                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateA);
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.GateB))
-                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.GateB);
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.LczA))
-                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.LczA);
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.LczB))
-                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.LczB);
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.Nuke))
-                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.Nuke);
-                if (ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorType.Scp049))
-                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorType.Scp049);
+                foreach (ElevatorType type in ElevatorLockdown.Instance.disabledElevators)
+                    ElevatorLockdown.Instance.disabledElevators.Remove(type);
 
                 if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsgde != null) 
                     Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broadcastMsgde, Broadcast.BroadcastFlags.Normal, true);
@@ -97,23 +74,11 @@ namespace ElevatorLockdown
 
         private string CassieReadable(ElevatorType type) 
         {
-            switch (type)
+            foreach(var readable in ElevatorLockdown.Instance.Config.CassieReadable)
             {
-                case ElevatorType.GateA:
-                    return "Gate A";
-                case ElevatorType.GateB:
-                    return "Gate B";
-                case ElevatorType.LczA:
-                    return "Light Containment Zone A";
-                case ElevatorType.LczB:
-                    return "Light Containment Zone B";
-                case ElevatorType.Nuke:
-                    return "Nuke";
-                case ElevatorType.Scp049:
-                    return "SCP 0 4 9";
-                default:
-                    return "";
+                if (readable.Key == type) return readable.Value;
             }
+            return "";
         }
     }
 }

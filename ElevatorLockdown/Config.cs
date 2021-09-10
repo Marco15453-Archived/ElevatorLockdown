@@ -1,4 +1,6 @@
-﻿using Exiled.API.Interfaces;
+﻿using Exiled.API.Enums;
+using Exiled.API.Interfaces;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace ElevatorLockdown 
@@ -13,16 +15,30 @@ namespace ElevatorLockdown
         public int DelayMax { get; set; } = 500;
 
         [Description("What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled")]
-        public int GateAFailureChance { get; set; } = 50;
-        public int GateBFailureChance { get; set; } = 50;
-        public int LCZAFailureChance { get; set; } = 50;
-        public int LCZBFailureChance { get; set; } = 50;
-        public int NukeFailureChance { get; set; } = 50;
-        public int Scp049FailureChance { get; set; } = 50;
+        public Dictionary<ElevatorType, int> FailureChances { get; set; } = new Dictionary<ElevatorType, int>
+        {
+            { ElevatorType.GateA, 50},
+            { ElevatorType.GateB, 50 },
+            { ElevatorType.LczA, 50 },
+            { ElevatorType.LczB, 50 },
+            { ElevatorType.Nuke, 50 },
+            { ElevatorType.Scp049, 50 }
+        };
 
         [Description("How long the elevator is deactivated")]
         public int LockdownTimeMin { get; set; } = 30;
         public int LockdownTimeMax { get; set; } = 60;
+
+        [Description("Cassie Replacements for ElevatorType")]
+        public Dictionary<ElevatorType, string> CassieReadable { get; set; } = new Dictionary<ElevatorType, string>
+        {
+            { ElevatorType.GateA, "Gate A" },
+            { ElevatorType.GateB, "Gate B" },
+            { ElevatorType.LczA, "Light Containment Zone A" },
+            { ElevatorType.LczB, "Light Containment Zone B" },
+            { ElevatorType.Nuke, "Nuke" },
+            { ElevatorType.Scp049, "SCP 0 4 9" }
+        };
 
         [Description("Cassie message if an elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names")]
         public string CassieMessage { get; set; } = "{ELEVATOR} elevator critical power failure";
