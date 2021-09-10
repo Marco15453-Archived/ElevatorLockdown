@@ -40,11 +40,11 @@ namespace ElevatorLockdown
             { ElevatorType.Scp049, "SCP 0 4 9" }
         };
 
-        [Description("Cassie message if an elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names")]
-        public string CassieMessage { get; set; } = "{ELEVATOR} elevator critical power failure";
+        [Description("Cassie message if an elevator gets deactivated? %ELEVATOR% will be replaced with the Elevator Names")]
+        public string CassieMessage { get; set; } = "%ELEVATOR% elevator critical power failure";
         
-        [Description("Cassie message if an elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names")]
-        public string CassieMessageReactivated { get; set; } = "{ELEVATOR} elevator is back in operational mode";
+        [Description("Cassie message if an elevator gets reactivated? %ELEVATOR% will be replaced with the Elevator Names")]
+        public string CassieMessageReactivated { get; set; } = "%ELEVATOR% elevator is back in operational mode";
 
         [Description("How long should the broadcast be displayed? (-1 disables it)")]
         public ushort HintTime { get; set; } = 3;
@@ -55,11 +55,11 @@ namespace ElevatorLockdown
         [Description("How long should the global broadcast be displayed? (-1 disables it)")]
         public ushort GlobalBroadcastTime { get; set; } = 5;
 
-        [Description("What message should be global broadcasted when a elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names")]
-        public string GlobalBroadcastMessage { get; set; } = "<color=red>{ELEVATOR}</color> <color=blue>Elevator Critical Power Failure! Rebooting!</color>";
+        [Description("What message should be global broadcasted when a elevator gets deactivated? %ELEVATOR% will be replaced with the Elevator Names")]
+        public string GlobalBroadcastMessage { get; set; } = "<color=red>%ELEVATOR%</color> <color=blue>Elevator Critical Power Failure! Rebooting!</color>";
 
-        [Description("What message should be global broadcasted when a elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names")]
-        public string GlobalBroadcastMessageReactivated { get; set; } = "<color=red>{ELEVATOR}</color> <color=green>Elevator back in operational mode</color>";
+        [Description("What message should be global broadcasted when a elevator gets reactivated? %ELEVATOR% will be replaced with the Elevator Names")]
+        public string GlobalBroadcastMessageReactivated { get; set; } = "<color=red>%ELEVATOR%</color> <color=green>Elevator back in operational mode</color>";
 
     }
 }

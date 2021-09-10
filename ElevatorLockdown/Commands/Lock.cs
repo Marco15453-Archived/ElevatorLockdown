@@ -53,7 +53,7 @@ namespace ElevatorLockdown.Commands
                 return false;
             }
 
-            Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessage.Replace("{ELEVATOR}", elevators).Replace(",", string.Empty));
+            Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessage.Replace("%ELEVATOR%", elevators).Replace(",", string.Empty));
             response = $"{elevators} Elevators was disabled by Administrator";
             return true;
         }

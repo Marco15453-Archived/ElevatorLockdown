@@ -34,8 +34,8 @@ namespace ElevatorLockdown
                 foreach (ElevatorType type in ElevatorLockdown.Instance.disabledElevators)
                     gateNames += $"{CassieReadable(type).Trim()}, ";
                 gateNames = gateNames.Remove(gateNames.LastIndexOf(','));
-                broadcastMsg = broadcastMsg.Replace("{ELEVATOR}", gateNames);
-                cassieMsg = cassieMsg.Replace("{ELEVATOR}", gateNames).Replace(",", string.Empty).Replace("-", " ");
+                broadcastMsg = broadcastMsg.Replace("%ELEVATOR%", gateNames);
+                cassieMsg = cassieMsg.Replace("%ELEVATOR%", gateNames).Replace(",", string.Empty).Replace("-", " ");
 
                 if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsg != null)
                     Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broadcastMsg, Broadcast.BroadcastFlags.Normal, true);
@@ -52,8 +52,8 @@ namespace ElevatorLockdown
                 foreach (ElevatorType type in ElevatorLockdown.Instance.disabledElevators)
                     gateNamesde += $"{CassieReadable(type).Trim()}, ";
                 gateNamesde = gateNamesde.Remove(gateNamesde.LastIndexOf(','));
-                broadcastMsgde = broadcastMsgde.Replace("{ELEVATOR}", gateNamesde);
-                cassieMsgde = cassieMsgde.Replace("{ELEVATOR}", gateNamesde).Replace(",", string.Empty);
+                broadcastMsgde = broadcastMsgde.Replace("%ELEVATOR%", gateNamesde);
+                cassieMsgde = cassieMsgde.Replace("%ELEVATOR%", gateNamesde).Replace(",", string.Empty);
 
                 foreach (ElevatorType type in ElevatorLockdown.Instance.disabledElevators)
                     ElevatorLockdown.Instance.disabledElevators.Remove(type);

@@ -18,13 +18,13 @@ failure_chances | Dictionary | What is the Chance of a Elevator Failure? 100 mea
 lockdown_time_min | int | How long the elevator is deactivated? min | 30
 lockdown_time_max | int | How long the elevator is deactivated? max | 60
 cassie_readable | Dictionary | Cassie Replacements for ElevatorType | Gate A, Gate B, Light Containment Zone A, Light Containment Zone B, Nuke, SCP 0 4 9
-cassie_message | string | Cassie message if an elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names | {ELEVATOR} elevator critical power failure
-cassie_message_reactivated | string | Cassie message if an elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names | {ELEVATOR} elevator is back in operational mode
+cassie_message | string | Cassie message if an elevator gets deactivated? %ELEVATOR% will be replaced with the Elevator Names | %ELEVATOR% elevator critical power failure
+cassie_message_reactivated | string | Cassie message if an elevator gets reactivated? %ELEVATOR% will be replaced with the Elevator Names | %ELEVATOR% elevator is back in operational mode
 hint_time | int | How long should the broadcast be displayed? (-1 disables it) | 3
 hint_message | string | What message should be displayed when player trys to call/use a deactivated Elevator? | <color=red>The Elevator has a malfunction!</color>
 global_broadcast_time | int | How long should the global broadcast be displayed? (-1 disables it) | 5
-global_broadcast_message | string | What message should be global broadcasted when a elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names | <color=red>{ELEVATOR}</color> <color=blue>Elevator Critical Power Failure! Rebooting!</color>
-global_broadcast_message_reactivated | string | What message should be global broadcasted when a elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names | <color=red>{ELEVATOR}</color> <color=green>Elevator back in operational mode</color>
+global_broadcast_message | string | What message should be global broadcasted when a elevator gets deactivated? %ELEVATOR% will be replaced with the Elevator Names | <color=red>%ELEVATOR%</color> <color=blue>Elevator Critical Power Failure! Rebooting!</color>
+global_broadcast_message_reactivated | string | What message should be global broadcasted when a elevator gets reactivated? %ELEVATOR% will be replaced with the Elevator Names | <color=red>%ELEVATOR%</color> <color=green>Elevator back in operational mode</color>
 
 # Default Config
 ```yml
@@ -53,18 +53,18 @@ elevator_lockdown:
     LczB: Light Containment Zone B
     Nuke: Nuke
     Scp049: SCP 0 4 9
-  # Cassie message if an elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names
-  cassie_message: '{ELEVATOR} elevator critical power failure'
-  # Cassie message if an elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names
-  cassie_message_reactivated: '{ELEVATOR} elevator is back in operational mode'
+  # Cassie message if an elevator gets deactivated? %ELEVATOR% will be replaced with the Elevator Names
+  cassie_message: '%ELEVATOR% elevator critical power failure'
+  # Cassie message if an elevator gets reactivated? %ELEVATOR% will be replaced with the Elevator Names
+  cassie_message_reactivated: '%ELEVATOR% elevator is back in operational mode'
   # How long should the broadcast be displayed? (-1 disables it)
   hint_time: 3
   # What message should be displayed when player trys to call/use a deactivated Elevator?
   hint_message: <color=red>The Elevator has a malfunction!</color>
   # How long should the global broadcast be displayed? (-1 disables it)
   global_broadcast_time: 5
-  # What message should be global broadcasted when a elevator gets deactivated? {ELEVATOR} will be replaced with the Elevator Names
-  global_broadcast_message: <color=red>{ELEVATOR}</color> <color=blue>Elevator Critical Power Failure! Rebooting!</color>
-  # What message should be global broadcasted when a elevator gets reactivated? {ELEVATOR} will be replaced with the Elevator Names
-  global_broadcast_message_reactivated: <color=red>{ELEVATOR}</color> <color=green>Elevator back in operational mode</color>
+  # What message should be global broadcasted when a elevator gets deactivated? %ELEVATOR% will be replaced with the Elevator Names
+  global_broadcast_message: <color=red>%ELEVATOR%</color> <color=blue>Elevator Critical Power Failure! Rebooting!</color>
+  # What message should be global broadcasted when a elevator gets reactivated? %ELEVATOR% will be replaced with the Elevator Names
+  global_broadcast_message_reactivated: <color=red>%ELEVATOR%</color> <color=green>Elevator back in operational mode</color>
 ```
