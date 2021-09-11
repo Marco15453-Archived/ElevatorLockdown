@@ -15,7 +15,7 @@ namespace ElevatorLockdown
     {
         private IEnumerator<float> startLockdown() 
         {
-            for (;; ) 
+            while (true) 
             {
                 int startdelay = UnityEngine.Random.Range(ElevatorLockdown.Instance.Config.DelayMin, ElevatorLockdown.Instance.Config.DelayMax);
                 yield return Timing.WaitForSeconds(startdelay);
@@ -39,7 +39,7 @@ namespace ElevatorLockdown
 
                 if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsg != null)
                     Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broadcastMsg, Broadcast.BroadcastFlags.Normal, true);
-                Cassie.Message(cassieMsg);
+                if(cassieMsg != null) Cassie.Message(cassieMsg);
 
                 int random_delay = UnityEngine.Random.Range(ElevatorLockdown.Instance.Config.LockdownTimeMin, ElevatorLockdown.Instance.Config.LockdownTimeMax);
                 yield return Timing.WaitForSeconds(random_delay);
@@ -53,14 +53,13 @@ namespace ElevatorLockdown
                     gateNamesde += $"{CassieReadable(type).Trim()}, ";
                 gateNamesde = gateNamesde.Remove(gateNamesde.LastIndexOf(','));
                 broadcastMsgde = broadcastMsgde.Replace("%ELEVATOR%", gateNamesde);
-                cassieMsgde = cassieMsgde.Replace("%ELEVATOR%", gateNamesde).Replace(",", string.Empty);
+                cassieMsgde = cassieMsgde.Replace("%ELEVATOR%", gateNamesde).Replace(",", string.Empty).Replace("-", " ");
 
-                foreach (ElevatorType type in ElevatorLockdown.Instance.disabledElevators)
-                    ElevatorLockdown.Instance.disabledElevators.Remove(type);
+                ElevatorLockdown.Instance.disabledElevators.Clear();
 
-                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsgde != null) 
+                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsgde != null)
                     Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broadcastMsgde, Broadcast.BroadcastFlags.Normal, true);
-                Cassie.Message(cassieMsgde);
+                if(cassieMsgde != null) Cassie.Message(cassieMsgde);
             }
         }
 
