@@ -37,14 +37,12 @@ namespace ElevatorLockdown
         {
             Instance = this;
             RegisterEvents();
-            if (ElevatorLockdown.Instance.Config.AutoUpdate) updateCoroutine = Timing.RunCoroutine(AutoUpdater.AutoUpdates());
             base.OnEnabled();
         }
 
         public override void OnDisabled() 
         {
             UnregisterEvents();
-            Timing.KillCoroutines(updateCoroutine);
             base.OnDisabled();
         }
 
