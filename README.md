@@ -12,7 +12,6 @@ elist | el.list | List of all available Elevators | RemoteAdmin
 Name | Type | Description | Default
 ---- | ---- | ----------- | -------
 is_enabled | bool | Should the plugin be enabled? | true
-auto_update | bool | Should the plugin automaticly update? | true
 delay_min | int | How much time that needs to pass before the elevator lockdown min(Seconds) | 300
 delay_max | int |How much time that needs to pass before the elevator lockdown max(Seconds) | 500
 failure_chances | Dictionary | What is the Chance of a Elevator Failure? 100 means everytime, 0 = disabled | All on 50
@@ -32,8 +31,6 @@ global_broadcast_message_reactivated | string | What message should be global br
 elevator_lockdown:
   # Should the plugin be enabled?
   is_enabled: true
-  # Should the plugin automaticly update?
-  auto_update: true
   # How much time that needs to pass before the elevator lockdown (Seconds)
   delay_min: 300
   delay_max: 500
