@@ -27,39 +27,25 @@ namespace ElevatorLockdown
                         ElevatorLockdown.Instance.disabledElevators.Add(failures.Key);
                 }
 
-                string broadcastMsg = ElevatorLockdown.Instance.Config.GlobalBroadcastMessage;
-                string cassieMsg = ElevatorLockdown.Instance.Config.CassieMessage;
                 string gateNames = string.Empty;
 
                 foreach (ElevatorType type in ElevatorLockdown.Instance.disabledElevators)
                     gateNames += $"{CassieReadable(type).Trim()}, ";
                 gateNames = gateNames.Remove(gateNames.LastIndexOf(','));
-                broadcastMsg = broadcastMsg.Replace("%ELEVATOR%", gateNames);
-                cassieMsg = cassieMsg.Replace("%ELEVATOR%", gateNames).Replace(",", string.Empty).Replace("-", " ");
 
-                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsg != null)
-                    Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broadcastMsg, Broadcast.BroadcastFlags.Normal, true);
-                if(cassieMsg != null) Cassie.Message(cassieMsg);
+                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && ElevatorLockdown.Instance.Config.GlobalBroadcastMessage != null)
+                    Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, ElevatorLockdown.Instance.Config.GlobalBroadcastMessage.Replace("%ELEVATOR%", gateNames), Broadcast.BroadcastFlags.Normal, true);
+                if(ElevatorLockdown.Instance.Config.CassieMessage != null) Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessage.Replace("%ELEVATOR%", gateNames).Replace(",", string.Empty));
 
                 int random_delay = UnityEngine.Random.Range(ElevatorLockdown.Instance.Config.LockdownTimeMin, ElevatorLockdown.Instance.Config.LockdownTimeMax);
                 yield return Timing.WaitForSeconds(random_delay);
 
-                // Reactive the Elevators
-                string broadcastMsgde = ElevatorLockdown.Instance.Config.GlobalBroadcastMessageReactivated;
-                string cassieMsgde = ElevatorLockdown.Instance.Config.CassieMessageReactivated;
-                string gateNamesde = string.Empty;
-
-                foreach (ElevatorType type in ElevatorLockdown.Instance.disabledElevators)
-                    gateNamesde += $"{CassieReadable(type).Trim()}, ";
-                gateNamesde = gateNamesde.Remove(gateNamesde.LastIndexOf(','));
-                broadcastMsgde = broadcastMsgde.Replace("%ELEVATOR%", gateNamesde);
-                cassieMsgde = cassieMsgde.Replace("%ELEVATOR%", gateNamesde).Replace(",", string.Empty).Replace("-", " ");
-
                 ElevatorLockdown.Instance.disabledElevators.Clear();
 
-                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && broadcastMsgde != null)
-                    Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, broadcastMsgde, Broadcast.BroadcastFlags.Normal, true);
-                if(cassieMsgde != null) Cassie.Message(cassieMsgde);
+                if (ElevatorLockdown.Instance.Config.GlobalBroadcastTime > 0 && ElevatorLockdown.Instance.Config.GlobalBroadcastMessageReactivated != null)
+                    Map.Broadcast(ElevatorLockdown.Instance.Config.GlobalBroadcastTime, ElevatorLockdown.Instance.Config.GlobalBroadcastMessageReactivated.Replace("%ELEVATOR%", gateNames), Broadcast.BroadcastFlags.Normal, true);
+                if(ElevatorLockdown.Instance.Config.CassieMessageReactivated != null)
+                    Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessageReactivated.Replace("%ELEVATOR%", gateNames));
             }
         }
 
