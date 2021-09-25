@@ -20,7 +20,7 @@ namespace ElevatorLockdown.Commands
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response) {
             Player p = Player.Get((CommandSender)sender);
 
-            if (p != null && !p.CheckPermission("el.lock")) 
+            if (p != null && !sender.CheckPermission("el.lock")) 
             {
                 response = "You need the 'el.lock' permission to use this Command!";
                 return false;
@@ -35,7 +35,7 @@ namespace ElevatorLockdown.Commands
             string elevators = string.Empty;
             string notexist = string.Empty;
 
-            foreach (var argument in arguments.ToList())
+            foreach (var argument in arguments)
             {
                 if (ElevatorLockdown.Instance.Elevators.Contains(argument.ToLower()) && !ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorToType(argument.ToLower())))
                 {

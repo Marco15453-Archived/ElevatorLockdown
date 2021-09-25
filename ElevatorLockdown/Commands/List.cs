@@ -21,7 +21,7 @@ namespace ElevatorLockdown.Commands
         {
             Player p = Player.Get((CommandSender)sender);
 
-            if (p != null && !p.CheckPermission("el.list"))
+            if (p != null && !sender.CheckPermission("el.list"))
             {
                 response = "You need the 'el.list' permission to use this Command!";
                 return false;

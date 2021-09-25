@@ -10,9 +10,6 @@ namespace ElevatorLockdown
         [Description("Should the plugin be enabled?")]
         public bool IsEnabled { get; set; } = true;
 
-        [Description("Should the plugin automaticly update?")]
-        public bool AutoUpdate { get; set; } = true;
-
         [Description("How much time that needs to pass before the elevator lockdown (Seconds)")]
         public int DelayMin { get; set; } = 300;
         public int DelayMax { get; set; } = 500;
