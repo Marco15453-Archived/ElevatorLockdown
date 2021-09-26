@@ -47,7 +47,7 @@ namespace ElevatorLockdown.Commands
                 }
             }
 
-            if(notexist != null && notexist != string.Empty)
+            if(string.IsNullOrEmpty(notexist))
             {
                 response = $"{notexist.Remove(notexist.LastIndexOf(","))} are not valid Elevators or was already disabled!";
                 return false;
