@@ -28,7 +28,7 @@ namespace ElevatorLockdown.Commands
             string list = "";
 
             foreach(var item in ElevatorLockdown.Instance.Elevators)
-                list += $"{item}\n";
+                list += $"- {item}\n";
 
             response = $"Available Elevators: \n{list}";
             return true;

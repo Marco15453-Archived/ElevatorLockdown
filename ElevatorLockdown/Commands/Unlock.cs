@@ -18,9 +18,7 @@ namespace ElevatorLockdown.Commands
         public string Description { get; } = "Unlocks Elevators";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response) {
-            Player p = Player.Get((CommandSender)sender);
-
-            if (p != null && !sender.CheckPermission("el.unlock"))
+            if (sender != null && !sender.CheckPermission("el.unlock"))
             {
                 response = "You need the 'el.unlock' permission to use this Command!";
                 return false;
@@ -41,11 +39,7 @@ namespace ElevatorLockdown.Commands
                 {
                     ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorToType(argument.ToLower()));
                     elevators += $"{CassieReadable(ElevatorToType(argument.ToLower())).Trim()}, ";
-                }
-                else
-                {
-                    notexist += $"{argument.ToLower()}, ";
-                }
+                } else notexist += $"{argument.ToLower()}, ";
             }
 
             if (string.IsNullOrEmpty(notexist))
