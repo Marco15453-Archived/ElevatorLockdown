@@ -1,12 +1,7 @@
 ﻿using CommandSystem;
-using Exiled.API.Enums;
-using Exiled.API.Extensions;
 using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
-using RemoteAdmin;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ElevatorLockdown.Commands 
 {
@@ -35,10 +30,10 @@ namespace ElevatorLockdown.Commands
 
             foreach (var argument in arguments)
             {
-                if (ElevatorLockdown.Instance.Elevators.Contains(argument.ToLower()) && ElevatorLockdown.Instance.disabledElevators.Contains(ElevatorToType(argument.ToLower())))
+                if (ElevatorLockdown.Instance.Elevators.Contains(argument.ToLower()) && ElevatorLockdown.Instance.DisabledElevators.Contains(Extensions.ElevatorToType(argument.ToLower())))
                 {
-                    ElevatorLockdown.Instance.disabledElevators.Remove(ElevatorToType(argument.ToLower()));
-                    elevators += $"{CassieReadable(ElevatorToType(argument.ToLower())).Trim()}, ";
+                    ElevatorLockdown.Instance.DisabledElevators.Remove(Extensions.ElevatorToType(argument.ToLower()));
+                    elevators += $"{Extensions.CassieReadable(Extensions.ElevatorToType(argument.ToLower())).Trim()}, ";
                 } else notexist += $"{argument.ToLower()}, ";
             }
 
@@ -51,24 +46,6 @@ namespace ElevatorLockdown.Commands
             Cassie.Message(ElevatorLockdown.Instance.Config.CassieMessageReactivated.Replace("%ELEVATOR%", elevators).Replace(",", string.Empty));
             response = $"{elevators} Elevators was enabled by Administrator";
             return true;
-        }
-
-        private ElevatorType ElevatorToType(string str)
-        {
-            foreach (var readable in ElevatorLockdown.Instance.StringToElevator)
-            {
-                if (readable.Key == str) return readable.Value;
-            }
-            return ElevatorType.Unknown;
-        }
-
-        private string CassieReadable(ElevatorType type)
-        {
-            foreach (var readable in ElevatorLockdown.Instance.Config.CassieReadable)
-            {
-                if (readable.Key == type) return readable.Value;
-            }
-            return "";
         }
     }
 }

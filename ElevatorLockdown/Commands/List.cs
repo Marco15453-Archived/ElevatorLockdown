@@ -1,12 +1,6 @@
 ﻿using CommandSystem;
-using Exiled.API.Enums;
-using Exiled.API.Extensions;
-using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
-using RemoteAdmin;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ElevatorLockdown.Commands
 {

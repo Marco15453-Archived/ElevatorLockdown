@@ -56,7 +56,7 @@ namespace ElevatorLockdown
         public ushort GlobalBroadcastTime { get; set; } = 5;
 
         [Description("What message should be global broadcasted when a elevator gets deactivated? %ELEVATOR% will be replaced with the Elevator Names")]
-        public string GlobalBroadcastMessage { get; set; } = "<color=red>%ELEVATOR%</color> <color=blue>Elevator Critical Power Failure! Rebooting!</color>";
+        public string GlobalBroadcastMessage { get; set; } = "<color=red>%ELEVATOR%</color> <color=blue>Elevator Critical Power Failure!</color>";
 
         [Description("What message should be global broadcasted when a elevator gets reactivated? %ELEVATOR% will be replaced with the Elevator Names")]
         public string GlobalBroadcastMessageReactivated { get; set; } = "<color=red>%ELEVATOR%</color> <color=green>Elevator back in operational mode</color>";

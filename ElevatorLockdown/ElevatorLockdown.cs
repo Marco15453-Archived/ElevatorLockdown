@@ -1,7 +1,6 @@
 ﻿using ElevatorLockdown.Events;
 using Exiled.API.Enums;
 using Exiled.API.Features;
-using MEC;
 using System;
 using System.Collections.Generic;
 
@@ -13,13 +12,13 @@ namespace ElevatorLockdown
 
         public override string Author => "Marco15453";
         public override string Name => "ElevatorLockdown";
-        public override Version Version => new Version(1, 7, 2);
+        public override Version Version => new Version(1, 8, 0);
         public override Version RequiredExiledVersion => new Version(3, 0, 0);
 
         private ServerHandler serverHandler;
         private PlayerHandler playerHandler;
 
-        public HashSet<ElevatorType> disabledElevators = new HashSet<ElevatorType>();
+        public HashSet<ElevatorType> DisabledElevators = new HashSet<ElevatorType>();
         public HashSet<string> Elevators = new HashSet<string> { "gatea", "gateb", "lcza", "lczb", "nuke", "scp049" };
         public Dictionary<string, ElevatorType> StringToElevator = new Dictionary<string, ElevatorType>()
         {
@@ -34,36 +33,36 @@ namespace ElevatorLockdown
         public override void OnEnabled() 
         {
             Instance = this;
-            RegisterEvents();
+            registerEvents();
             base.OnEnabled();
         }
 
         public override void OnDisabled() 
         {
-            UnregisterEvents();
+            unregisterEvents();
             base.OnDisabled();
         }
 
 
-        private void RegisterEvents() 
+        private void registerEvents() 
         {
             serverHandler = new ServerHandler();
             playerHandler = new PlayerHandler();
 
             // Server
-            Exiled.Events.Handlers.Server.RoundStarted += serverHandler.onRoundStarted;
+            Exiled.Events.Handlers.Server.RoundStarted += serverHandler.OnRoundStarted;
 
             // Player
-            Exiled.Events.Handlers.Player.InteractingElevator += playerHandler.onInteractingElevator;
+            Exiled.Events.Handlers.Player.InteractingElevator += playerHandler.OnInteractingElevator;
         }
 
-        private void UnregisterEvents() 
+        private void unregisterEvents() 
         {
             // Server
-            Exiled.Events.Handlers.Server.RoundStarted -= serverHandler.onRoundStarted;
+            Exiled.Events.Handlers.Server.RoundStarted -= serverHandler.OnRoundStarted;
 
             // Player
-            Exiled.Events.Handlers.Player.InteractingElevator -= playerHandler.onInteractingElevator;
+            Exiled.Events.Handlers.Player.InteractingElevator -= playerHandler.OnInteractingElevator;
 
             serverHandler = null;
             playerHandler = null;

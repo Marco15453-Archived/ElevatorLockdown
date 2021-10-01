@@ -84,6 +84,7 @@
     <Compile Include="ElevatorLockdown.cs" />
     <Compile Include="Events\ServerHandler.cs" />
     <Compile Include="Events\PlayerHandler.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
