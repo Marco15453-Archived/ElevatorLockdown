@@ -19,12 +19,9 @@ namespace ElevatorLockdown.Commands
                 return false;
             }
 
-            string list = "";
-
+            response = "\nAvailable Elevators:\n";
             foreach(var item in ElevatorLockdown.Instance.Elevators)
-                list += $"- {item}\n";
-
-            response = $"Available Elevators: \n{list}";
+                response += $"- {item}\n";
             return true;
         }
     }

@@ -9,7 +9,7 @@ namespace ElevatorLockdown.Commands
     public class Lock : ICommand 
     {
         public string Command { get; } = "elock";
-        public string[] Aliases { get; } = { };
+        public string[] Aliases { get; } = Array.Empty<string>();
         public string Description { get; } = "Locks Elevators";
         
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response) {

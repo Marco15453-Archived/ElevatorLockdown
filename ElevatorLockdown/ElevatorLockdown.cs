@@ -3,6 +3,7 @@ using Exiled.API.Enums;
 using Exiled.API.Features;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ElevatorLockdown 
 {
@@ -12,15 +13,15 @@ namespace ElevatorLockdown
 
         public override string Author => "Marco15453";
         public override string Name => "ElevatorLockdown";
-        public override Version Version => new Version(1, 8, 0);
-        public override Version RequiredExiledVersion => new Version(3, 0, 0);
+        public override Version Version => new Version(1, 9, 0);
+        public override Version RequiredExiledVersion => new Version(4, 2, 2);
 
         private ServerHandler serverHandler;
         private PlayerHandler playerHandler;
 
         public HashSet<ElevatorType> DisabledElevators = new HashSet<ElevatorType>();
-        public HashSet<string> Elevators = new HashSet<string> { "gatea", "gateb", "lcza", "lczb", "nuke", "scp049" };
-        public Dictionary<string, ElevatorType> StringToElevator = new Dictionary<string, ElevatorType>()
+        public List<string> Elevators = StringToElevator.Keys.ToList();
+        public static Dictionary<string, ElevatorType> StringToElevator = new Dictionary<string, ElevatorType>()
         {
             { "gatea", ElevatorType.GateA},
             { "gateb", ElevatorType.GateB },

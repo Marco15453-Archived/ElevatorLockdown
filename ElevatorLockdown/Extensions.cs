@@ -6,15 +6,15 @@ namespace ElevatorLockdown
     {
         public static ElevatorType ElevatorToType(string str)
         {
-            foreach (var readable in ElevatorLockdown.Instance.StringToElevator)
-                if (readable.Key == str) return readable.Value;
+            if (ElevatorLockdown.StringToElevator.TryGetValue(str, out ElevatorType type))
+                return type;
             return ElevatorType.Unknown;
         }
 
         public static string CassieReadable(ElevatorType type)
         {
-            foreach (var readable in ElevatorLockdown.Instance.Config.CassieReadable)
-                if (readable.Key == type) return readable.Value;
+            if (ElevatorLockdown.Instance.Config.CassieReadable.TryGetValue(type, out string str));
+                return str;
             return "";
         }
     }
