@@ -14,7 +14,7 @@ namespace ElevatorLockdown
         public override string Author => "Marco15453";
         public override string Name => "ElevatorLockdown";
         public override Version Version => new Version(1, 9, 0);
-        public override Version RequiredExiledVersion => new Version(4, 2, 2);
+        public override Version RequiredExiledVersion => new Version(5, 3, 0);
 
         private ServerHandler serverHandler;
         private PlayerHandler playerHandler;
