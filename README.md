@@ -1,3 +1,5 @@
+# THIS PLUGIN HAS BEEN ARCHIVED
+
 # ElevatorLockdown
 A complex plugin that allows the Elevators to failure after a specific delay and chance.
 
