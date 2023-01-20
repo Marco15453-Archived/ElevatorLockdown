@@ -5,16 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ElevatorLockdown 
+namespace ElevatorLockdown
 {
-    public class ElevatorLockdown : Plugin<Config> 
+    public class ElevatorLockdown : Plugin<Config>
     {
         internal static ElevatorLockdown Instance;
 
         public override string Author => "Marco15453";
         public override string Name => "ElevatorLockdown";
-        public override Version Version => new Version(1, 10, 0);
-        public override Version RequiredExiledVersion => new Version(5, 3, 0);
+        public override Version Version => new Version(1, 11, 0);
+        public override Version RequiredExiledVersion => new Version(6, 0, 0);
 
         private ServerHandler serverHandler;
         private PlayerHandler playerHandler;
@@ -31,21 +31,21 @@ namespace ElevatorLockdown
             { "scp049", ElevatorType.Scp049}
         };
 
-        public override void OnEnabled() 
+        public override void OnEnabled()
         {
             Instance = this;
             registerEvents();
             base.OnEnabled();
         }
 
-        public override void OnDisabled() 
+        public override void OnDisabled()
         {
             unregisterEvents();
             base.OnDisabled();
         }
 
 
-        private void registerEvents() 
+        private void registerEvents()
         {
             serverHandler = new ServerHandler();
             playerHandler = new PlayerHandler();
@@ -57,7 +57,7 @@ namespace ElevatorLockdown
             Exiled.Events.Handlers.Player.InteractingElevator += playerHandler.OnInteractingElevator;
         }
 
-        private void unregisterEvents() 
+        private void unregisterEvents()
         {
             // Server
             Exiled.Events.Handlers.Server.RoundStarted -= serverHandler.OnRoundStarted;

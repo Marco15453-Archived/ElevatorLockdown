@@ -20,7 +20,7 @@ namespace ElevatorLockdown.Commands
             }
 
             response = "\nAvailable Elevators:\n";
-            foreach(var item in ElevatorLockdown.Instance.Elevators)
+            foreach (var item in ElevatorLockdown.Instance.Elevators)
                 response += $"- {item}\n";
             return true;
         }

@@ -3,16 +3,17 @@ using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
 using System;
 
-namespace ElevatorLockdown.Commands 
+namespace ElevatorLockdown.Commands
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
-    public class Unlock : ICommand 
+    public class Unlock : ICommand
     {
         public string Command { get; } = "eunlock";
         public string[] Aliases { get; } = Array.Empty<string>();
         public string Description { get; } = "Unlocks Elevators";
 
-        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response) {
+        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        {
             if (sender != null && !sender.CheckPermission("el.unlock"))
             {
                 response = "You need the 'el.unlock' permission to use this Command!";
@@ -34,7 +35,8 @@ namespace ElevatorLockdown.Commands
                 {
                     ElevatorLockdown.Instance.DisabledElevators.Remove(Extensions.ElevatorToType(argument.ToLower()));
                     elevators += $"{Extensions.CassieReadable(Extensions.ElevatorToType(argument.ToLower())).Trim()}, ";
-                } else notexist += $"{argument.ToLower()}, ";
+                }
+                else notexist += $"{argument.ToLower()}, ";
             }
 
             if (string.IsNullOrEmpty(notexist))

@@ -13,7 +13,7 @@ namespace ElevatorLockdown
 
         public static string CassieReadable(ElevatorType type)
         {
-            if (ElevatorLockdown.Instance.Config.CassieReadable.TryGetValue(type, out string str));
+            if (ElevatorLockdown.Instance.Config.CassieReadable.TryGetValue(type, out string str))
                 return str;
             return "";
         }

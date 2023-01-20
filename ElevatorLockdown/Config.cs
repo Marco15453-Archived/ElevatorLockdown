@@ -3,12 +3,15 @@ using Exiled.API.Interfaces;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace ElevatorLockdown 
+namespace ElevatorLockdown
 {
-    public sealed class Config : IConfig 
+    public sealed class Config : IConfig
     {
         [Description("Should the plugin be enabled?")]
         public bool IsEnabled { get; set; } = true;
+
+        [Description("Should debug messages be shown?")]
+        public bool Debug { get; set; } = false;
 
         [Description("How much time that needs to pass before the elevator lockdown (Seconds)")]
         public int DelayMin { get; set; } = 300;
@@ -42,7 +45,7 @@ namespace ElevatorLockdown
 
         [Description("Cassie message if an elevator gets deactivated? %ELEVATOR% will be replaced with the Elevator Names")]
         public string CassieMessage { get; set; } = "%ELEVATOR% elevator critical power failure";
-        
+
         [Description("Cassie message if an elevator gets reactivated? %ELEVATOR% will be replaced with the Elevator Names")]
         public string CassieMessageReactivated { get; set; } = "%ELEVATOR% elevator is back in operational mode";
 

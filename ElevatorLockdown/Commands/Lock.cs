@@ -3,24 +3,25 @@ using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
 using System;
 
-namespace ElevatorLockdown.Commands 
+namespace ElevatorLockdown.Commands
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
-    public class Lock : ICommand 
+    public class Lock : ICommand
     {
         public string Command { get; } = "elock";
         public string[] Aliases { get; } = Array.Empty<string>();
         public string Description { get; } = "Locks Elevators";
-        
-        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response) {
-            
-            if (sender != null && !sender.CheckPermission("el.lock")) 
+
+        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        {
+
+            if (sender != null && !sender.CheckPermission("el.lock"))
             {
                 response = "You need the 'el.lock' permission to use this Command!";
                 return false;
             }
 
-            if (arguments.IsEmpty()) 
+            if (arguments.IsEmpty())
             {
                 response = "Use elist to get all available elevators";
                 return false;
@@ -35,10 +36,11 @@ namespace ElevatorLockdown.Commands
                 {
                     ElevatorLockdown.Instance.DisabledElevators.Add(Extensions.ElevatorToType(argument.ToLower()));
                     elevators += $"{Extensions.CassieReadable(Extensions.ElevatorToType(argument.ToLower())).Trim()}, ";
-                } else notexist += $"{argument.ToLower()}, ";
+                }
+                else notexist += $"{argument.ToLower()}, ";
             }
 
-            if(string.IsNullOrEmpty(notexist))
+            if (string.IsNullOrEmpty(notexist))
             {
                 response = $"{notexist.Remove(notexist.LastIndexOf(","))} are not valid Elevators or was already disabled!";
                 return false;
