@@ -1,5 +1,3 @@
-# THIS PLUGIN WILL BE REVIVED WHEN EXILED 6.0.0 RELEASES
-
 # ElevatorLockdown
 A complex plugin that allows the Elevators to failure after a specific delay and chance.
 
